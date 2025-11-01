@@ -1,1 +1,0 @@
-# Shouji-Rating-System
