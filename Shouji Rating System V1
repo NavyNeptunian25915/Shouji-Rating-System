@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shouji Rating System V1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            background: #000064;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            gap: 50px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 20px #ffffff;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            border: 1px solid;
+            border-radius: 20px;
+            background: rgba(0, 0, 100);
+            box-shadow: 0 0 20px;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .chart:hover {
+            transform: translateY(-5px);
+        }
+
+        .Achart {
+            border-color: #00ffff;
+            box-shadow: 0 0 20px #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+            color:#00ffff;
+        }
+
+        .Bchart {
+            border-color: #ff0000;
+            box-shadow: 0 0 20px #ff0000;
+            text-shadow: 0 0 20px #ff0000;
+            color:#ff0000;
+        }
+
+        .chart h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+
+        input[type="number"],
+        select {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            background: #000064;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #ffffff;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 200px;
+            box-sizing: border-box;
+            transition: box-shadow 0.3s ease;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 15px #ffffff;
+        }
+
+        .score-select-wrapper {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 100, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 15px #ffffff;
+        }
+
+
+        .results p {
+            font-size: 1.4rem;
+            word-wrap: break-word;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 15px auto;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .results #newA {
+            font-size:1rem;
+            color: #00ffff;
+            border: 1px solid #00ffff;
+            background-color:#006464;
+            box-shadow:#00ffff 0 0 5vmin;
+            text-shadow:#00ffff 0 0 5vmin;
+
+        }
+
+        .results #newB {
+            font-size:1rem;
+            color: #ff0000;
+            border: 1px solid #ff0000;
+            background-color:#640000;
+            box-shadow:#ff0000 0 0 5vmin;
+            text-shadow:#ff0000 0 0 5vmin;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Shouji Rating System V1</h1>
+        <p>A new rating concept.</p>
+
+        <div class="chart-container">
+            <div class="chart Achart">
+                <h2>Player A</h2>
+                <label for="ratingA">Rating</label>
+                <input type="number" id="ratingA" value="1500">
+                <label for="deviationA">Deviation</label>
+                <input type="number" id="deviationA" value="225">
+                <p id="newratingA">New Rating for Player A: 1500.00</p>
+                <p id="newdeviationA">New Deviation for Player A: 225.00</p>
+            </div>
+
+            <div class="chart Bchart">
+                <h2>Player B</h2>
+                <label for="ratingB">Rating</label>
+                <input type="number" id="ratingB" value="1500">
+                <label for="deviationB">Deviation</label>
+                <input type="number" id="deviationB" value="225">
+                <p id="newratingB">New Rating for Player B: 1500.00</p>            
+                <p id="newdeviationB">New Deviation for Player B: 225.00</p>
+            </div>
+        </div>
+
+        <div class="score-select-wrapper">
+            <label for="Score">Game Result:</label>
+            <select id="Score">
+                <option class="" value="2">Player A</option>
+                <option value="1">Draw</option>
+                <option value="0.5">Player B</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        const scoreSelect = document.getElementById("Score");
+        const ratingAInput = document.getElementById("ratingA");
+        const deviationAInput = document.getElementById("deviationA");
+        const ratingBInput = document.getElementById("ratingB");
+        const deviationBInput = document.getElementById("deviationB");
+        const newratingAParagraph = document.getElementById("newratingA");
+        const newratingBParagraph = document.getElementById("newratingB");
+        const newdeviationAParagraph = document.getElementById("newdeviationA");
+        const newdeviationBParagraph = document.getElementById("newdeviationB");
+
+        function calculateRating() {
+            // Retrieve input values inside the function and parse them
+            const playerArating = parseFloat(ratingAInput.value) || 0;
+            const playerBrating = parseFloat(ratingBInput.value) || 0;
+            const playerAdeviation = parseFloat(deviationAInput.value) || 1;
+            const playerBdeviation = parseFloat(deviationBInput.value) || 1;
+            const score = parseFloat(scoreSelect.value);
+
+            // Prevent division by zero and handle invalid inputs
+            if (playerArating <= 0 || playerBrating <= 0 || playerAdeviation <= 0 || playerAdeviation > 0.5*playerArating || playerBdeviation <= 0 || playerBdeviation > playerBrating) {
+                newratingAParagraph.textContent = "Please enter valid or positive ratings and deviations between 1 and 0.5*Rating";
+                newratingBParagraph.textContent = "Please enter valid or positive ratings and deviations between 1 and 0.5*Rating";
+                newdeviationAParagraph.textContent = "Please enter valid or positive ratings and deviations between 1 and 0.5*Rating";
+                newdeviationBParagraph.textContent = "Please enter valid or positive ratings and deviations between 1 and 0.5*Rating";
+                return;
+            }
+            
+            // Perform calculations
+            const prediction = playerArating / playerBrating;
+            const factorA = playerAdeviation / playerArating;
+            const factorB = playerBdeviation / playerBrating;
+
+            const newArating = playerArating * Math.pow((score / prediction), factorA);
+            const newBrating = playerBrating * Math.pow(((1 / score) / (1 / prediction)), factorB);
+
+            const newAdeviation = playerAdeviation - (playerAdeviation * factorA);
+            const newBdeviation = playerBdeviation - (playerBdeviation * factorB);
+
+            // Display the new ratings, formatted to two decimal places
+            newratingAParagraph.textContent = `New Rating for Player A: ${newArating.toFixed(0)}`;
+            newdeviationAParagraph.textContent = `New Deviation for Player A: ${newAdeviation.toFixed(0)}`;
+            newratingBParagraph.textContent = `New Rating for Player B: ${newBrating.toFixed(0)}`;
+            newdeviationBParagraph.textContent = `New Deviation for Player B: ${newBdeviation.toFixed(0)}`;
+        }
+
+        // Add event listeners to trigger the calculation when inputs change
+        scoreSelect.addEventListener("change", calculateRating);
+        ratingAInput.addEventListener("input", calculateRating);
+        deviationAInput.addEventListener("input", calculateRating);
+        ratingBInput.addEventListener("input", calculateRating);
+        deviationBInput.addEventListener("input", calculateRating);
+
+        // Run the calculation on page load with initial values
+        calculateRating();
+    </script>
+</body>
+</html>
