@@ -273,4 +273,4 @@ html_string = """
 </html>
 """
 
-components.html(html_string, height=1664, width=2560, scrolling=true)
+components.html(html_string, height=1664, width=2560, scrolling=True)
