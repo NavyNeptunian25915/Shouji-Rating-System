@@ -14,6 +14,8 @@ html_string = """
     <style>
         body {
             font-family: 'Orbitron', sans-serif;
+            height: 100%;
+            width: 100%;
             text-align: center;
             background: #000064;
             color: #ffffff;
