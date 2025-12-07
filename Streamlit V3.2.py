@@ -12,10 +12,12 @@ html_string = """
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Orbitron', sans-serif;
+        html{ 
             height: 100%;
             width: 100%;
+        }
+        body {
+            font-family: 'Orbitron', sans-serif;
             text-align: center;
             background: #000064;
             color: #ffffff;
