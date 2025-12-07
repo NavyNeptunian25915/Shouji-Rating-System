@@ -269,4 +269,4 @@ html_string = """
 </html>
 """
 
-components.html(html_string, height=300, scrolling=True) 
+components.html(html_string, height=None, scrolling=True) 
