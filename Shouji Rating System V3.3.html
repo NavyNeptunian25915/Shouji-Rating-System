@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shouji Rating System V3.3</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+<style>
+body{
+    font-family:Orbitron;
+    background:#000064;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+.container{
+    width:900px;
+    text-align:center;
+}
+.panel{
+    display:flex;
+    justify-content:space-between;
+}
+.box{
+    width:40%;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 0 20px;
+}
+.A{border:2px solid cyan; color:cyan;}
+.B{border:2px solid red; color:red;}
+input,select{
+    width:100%;
+    margin:8px 0;
+    padding:8px;
+    background:#000064;
+    color:white;
+    border:1px solid white;
+    text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>Shouji Rating System V3.3</h1>
+
+<div class="panel">
+<div class="box A">
+<h2>Player A</h2>
+µ <input id="Aµ" value="1500">
+φ <input id="Aφ" value="0.64">
+σ <input id="Aσ" value="0">
+<p id="Aout"></p>
+</div>
+
+<div class="box B">
+<h2>Player B</h2>
+µ <input id="Bµ" value="1500">
+φ <input id="Bφ" value="0.64">
+σ <input id="Bσ" value="0">
+<p id="Bout"></p>
+</div>
+</div>
+
+<br>
+
+β <input id="β" value="400">
+α <input id="α" value="0.5">
+
+<select id="result">
+<option value="1">A Wins</option>
+<option value="0.5">Draw</option>
+<option value="0">B Wins</option>
+</select>
+
+<br><br>
+<button onclick="run()">Calculate</button>
+
+</div>
+
+<script>
+function run(){
+
+let Aµ=+Aµi.value, Bµ=+Bµi.value
+let Aφ=+Aφi.value, Bφ=+Bφi.value
+let Aσ=+Aσi.value, Bσ=+Bσi.value
+let β=+βi.value, α=+αi.value
+let Aø=+result.value, Bø=1-Aø
+
+// Trust
+let AT = Aµ/(Aµ*Aφ + Aµ)
+let BT = Bµ/(Bµ*Bφ + Bµ)
+
+// Match sensitivity
+let C = Math.pow(Aφ*Bφ*AT*BT,0.25)*β + Math.log(β)
+
+// Win probabilities
+let Aw = 1/(1+Math.pow(10,(Bµ-Aµ)/C))
+let Bw = 1-Aw
+
+// Skill
+let Ash = Math.pow(Aµ,(Aφ+AT)/2)
+let Bsh = Math.pow(Bµ,(Bφ+BT)/2)
+
+// New ratings
+let Aµn = Aµ + Math.pow(Ash,α)*(Aø-Aw) + Math.pow(Ash,α)*Aσ
+let Bµn = Bµ + Math.pow(Bsh,α)*(Bø-Bw) + Math.pow(Bsh,α)*Bσ
+
+// New deviations
+let Aφn = Math.pow(Aφ*AT,1-Math.abs(Aσ))
+let Bφn = Math.pow(Bφ*BT,1-Math.abs(Bσ))
+
+Aout.textContent = "µ′ "+Aµn.toFixed(0)+"  φ′ "+Aφn.toFixed(3)
+Bout.textContent = "µ′ "+Bµn.toFixed(0)+"  φ′ "+Bφn.toFixed(3)
+}
+
+const Aµi=Aµ, Aφi=Aφ, Aσi=Aσ
+const Bµi=Bµ, Bφi=Bφ, Bσi=Bσ
+const βi=β, αi=α
+</script>
+
+</body>
+</html>
