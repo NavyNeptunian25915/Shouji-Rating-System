@@ -314,10 +314,10 @@
             const newBdeviation = Math.pow(playerBdeviation * TB, 1 - Math.abs(playerBvolatility));
 
             // Update the text content of the result elements
-            newratingAParagraph.textContent = `New Rating for Player A: ${newArating.toFixed(0)}`;
-            newdeviationAParagraph.textContent = `New Deviation for Player A: ${newAdeviation.toFixed(2)}`;
-            newratingBParagraph.textContent = `New Rating for Player B: ${newBrating.toFixed(0)}`;
-            newdeviationBParagraph.textContent = `New Deviation for Player B: ${newBdeviation.toFixed(2)}`;
+            newratingAParagraph.textContent = `New Rating for Player A: ${newArating.toFixed(15)}`;
+            newdeviationAParagraph.textContent = `New Deviation for Player A: ${newAdeviation.toFixed(15)}`;
+            newratingBParagraph.textContent = `New Rating for Player B: ${newBrating.toFixed(15)}`;
+            newdeviationBParagraph.textContent = `New Deviation for Player B: ${newBdeviation.toFixed(15)}`;
         }
 
         // Add event listeners to trigger the calculation when inputs change
