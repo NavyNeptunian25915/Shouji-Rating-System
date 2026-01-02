@@ -286,11 +286,11 @@ html_string = """
             const score = parseFloat(scoreSelect.value);
 
             // Input validation
-            if (playerArating <= 0 || playerBrating <= 0 || playerAdeviation <= 0 || playerBdeviation <= 0 || playerAdeviation > 1 || playerBdeviation > 1 || playerAvolatility < -1 || playerBvolatility < -1 || playerAvolatility > 1 || playerBvolatility > 1 || ratingvariation <= 0 || alpha < 0 || alpha > 1) {
-                newratingAParagraph.textContent = "Please enter valid ranged ratings, deviations, volatilities.";
-                newratingBParagraph.textContent = "Please enter valid ranged ratings, deviations, volatilities.";
-                newdeviationAParagraph.textContent = "Please enter valid ranged ratings, deviations, volatilities.";
-                newdeviationBParagraph.textContent = "Please enter valid ranged ratings, deviations, volatilities.";
+            if (playerArating < 1 || playerBrating < 1 || ratingvariation < 1) {
+                newratingAParagraph.textContent = "Please enter valid ranged values.";
+                newratingBParagraph.textContent = "Please enter valid ranged values.";
+                newdeviationAParagraph.textContent = "Please enter valid ranged values.";
+                newdeviationBParagraph.textContent = "Please enter valid ranged values.";
                 return;
             }
 
