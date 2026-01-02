@@ -217,7 +217,7 @@ html_string = """
 <body>
     <div class="container">
         <h1>Shouji Rating System V3.3</h1>
-        <p>Yet, another top one.</p>
+        <p>Yet, another top version.</p>
 
         <div class="chart-container">
             <div class="chart Achart">
