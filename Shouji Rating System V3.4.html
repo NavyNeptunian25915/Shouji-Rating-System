@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shouji Rating System V3.4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            background: #000064;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            gap: 50px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 20px #ffffff;
+            font-weight:1000;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            border: 1px solid;
+            border-radius: 20px;
+            background: rgba(0, 0, 100, 0.5);
+            box-shadow: 0 0 20px;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .chart:hover {
+            transform: translateY(-5px);
+        }
+
+        .Achart {
+            border-color: Cyan;
+            box-shadow: 0 0 20px Cyan;
+            text-shadow: 0 0 20px Cyan;
+            color: Cyan;
+        }
+
+        .Bchart {
+            border-color: #ff0000;
+            box-shadow: 0 0 20px Red;
+            text-shadow: 0 0 20px #ff0000;
+            color: #ff0000;
+        }
+
+        .chart h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+        input[type="range"],
+        #alphaValue[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            max-width: 200px;
+            height: 8px;
+            background: #000064;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #ffffff;
+            outline: none;
+            margin: 10px 0 20px 0;
+            cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-thumb,
+        #alphaValue[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background-color: #ffffff;
+            border: 2px solid #000064;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ffffff;
+            cursor: pointer;
+            margin-top: -6px;
+            transition: box-shadow 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        input[type="range"]:hover::-webkit-slider-thumb,
+        #alphaValue[type="range"]:hover::-webkit-slider-thumb {
+            box-shadow: 0 0 12px #ffffff;
+        }
+        input[type="range"]::-moz-range-thumb,
+        #alphaValue[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background-color: #ffffff;
+            border: 2px solid #000064;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ffffff;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        input[type="range"]:hover::-moz-range-thumb,
+        #alphaValue[type="range"]:hover::-moz-range-thumb {
+            box-shadow: 0 0 12px #ffffff;
+        }
+        /* For Firefox track styling */
+        input[type="range"]::-moz-range-track,
+        #alphaValue[type="range"]::-moz-range-track {
+            background: #000064;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #ffffff;
+            height: 8px;
+        }
+        /* For IE */
+        input[type="range"]::-ms-fill-lower,
+        input[type="range"]::-ms-fill-upper,
+        #alphaValue[type="range"]::-ms-fill-lower,
+        #alphaValue[type="range"]::-ms-fill-upper {
+            background: #000064;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #ffffff;
+        }
+        input[type="number"],
+        select {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            background: #000064;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #ffffff;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 200px;
+            box-sizing: border-box;
+            transition: box-shadow 0.3s ease;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 15px #ffffff;
+        }
+
+        .score-select-wrapper {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 100, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 15px #ffffff;
+        }
+        .textA {color: cyan; background-color:#006464;}
+        .textDraw {color: white; background-color:#646464;}
+        .textB {color: red; background-color:#640000;}
+
+        .results p {
+            font-size: 1.4rem;
+            word-wrap: break-word;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 15px auto;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .results #newA {
+            font-size:1rem;
+            color: Cyan;
+            border: 1px solid Cyan;
+            background-color:#006464;
+            box-shadow:Cyan 0 0 5vmin;
+            text-shadow:Cyan 0 0 5vmin;
+
+        }
+
+        .results #newB {
+            font-size:1rem;
+            color: #ff0000;
+            border: 1px solid #ff0000;
+            background-color:#640000;
+            box-shadow:#ff0000 0 0 5vmin;
+            text-shadow:#ff0000 0 0 5vmin;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Shouji Rating System V3.4</h1>
+        <p>So the last version truly isn't the best?</p>
+
+        <div class="chart-container">
+            <div class="chart Achart">
+                <h2>Player A</h2>
+                <label for="ratingA">Rating</label>
+                <input type="number" id="ratingA" value="1500">
+                <label for="deviationA">Deviation</label>
+                <input type="range" id="deviationA" value="0.64" min="0" max="1" step="0.01">
+                <label for="volatilityA">Volatility</label>
+                <input type="range" id="volatilityA" value="0" min="-1" max="1" step="0.01">
+                <p id="newratingA">New Rating for Player A: 1500</p>
+                <p id="newdeviationA">New Deviation for Player A: 0.64</p>
+            </div>
+
+            <div class="chart Bchart">
+                <h2>Player B</h2>
+                <label for="ratingB">Rating</label>
+                <input type="number" id="ratingB" value="1500">
+                <label for="deviationB">Deviation</label>
+                <input type="range" id="deviationB" value="0.64" min="0" max="1" step="0.01">
+                <label for="volatilityB">Volatility</label>
+                <input type="range" id="volatilityB" value="0" min="-1" max="1" step="0.01">
+                <p id="newratingB">New Rating for Player B: 1500</p>
+                <p id="newdeviationB">New Deviation for Player B: 0.64</p>
+            </div>
+        </div>
+
+        <div class="score-select-wrapper">
+            <label for="ratingvariationvalue">Variation:</label>
+            <input type="number" id="ratingvariationvalue" value="400">
+            <label for="alphaValue">Scale:</label>
+            <input type="range" id="alphaValue" value="0.5" min="0" max="1" step="0.01">
+            <label for="Score">Game Result:</label>
+            <select id="Score">
+                <option class="textA" value="1">Player A</option>
+                <option class="textDraw"value="0.5">Draw</option>
+                <option class="textB" value="0">Player B</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        const scoreSelect = document.getElementById("Score");
+        const ratingvariationInput = document.getElementById("ratingvariationvalue");
+        const alphaInput = document.getElementById("alphaValue");
+        const ratingAInput = document.getElementById("ratingA");
+        const deviationAInput = document.getElementById("deviationA");
+        const volatilityAInput = document.getElementById("volatilityA");
+        const ratingBInput = document.getElementById("ratingB");
+        const deviationBInput = document.getElementById("deviationB");
+        const volatilityBInput = document.getElementById("volatilityB");
+        const newratingAParagraph = document.getElementById("newratingA");
+        const newratingBParagraph = document.getElementById("newratingB");
+        const newdeviationAParagraph = document.getElementById("newdeviationA");
+        const newdeviationBParagraph = document.getElementById("newdeviationB");
+
+        function calculateRating() {
+            const playerArating = parseFloat(ratingAInput.value) || 1500;
+            const playerBrating = parseFloat(ratingBInput.value) || 1500;
+            const playerAdeviation = parseFloat(deviationAInput.value) || 0.64;
+            const playerBdeviation = parseFloat(deviationBInput.value) || 0.64;
+            const playerAvolatility = parseFloat(volatilityAInput.value) || 0;
+            const playerBvolatility = parseFloat(volatilityBInput.value) || 0;
+            const ratingvariation = parseFloat(ratingvariationInput.value) || 400;
+            const alpha = parseFloat(alphaInput.value) || 0.5;
+            const score = parseFloat(scoreSelect.value);
+
+            // Input validation
+            if (playerArating < 1 || playerBrating < 1 || ratingvariation < 1) {
+                newratingAParagraph.textContent = "Please enter valid ranged values.";
+                newratingBParagraph.textContent = "Please enter valid ranged values.";
+                newdeviationAParagraph.textContent = "Please enter valid ranged values.";
+                newdeviationBParagraph.textContent = "Please enter valid ranged values.";
+                return;
+            }
+
+            // Calculate TA and TB
+            const TA = playerArating / (playerArating * alpha + playerArating);
+            const TB = playerBrating / (playerBrating * alpha + playerBrating);
+
+            // Calculate C
+            const C = (playerAdeviation + playerBdeviation + TA + TB) / 4 * ratingvariation;
+
+            // Calculate adjusted ratings
+            const A_sh = Math.pow(playerArating, (alpha + TA) / 2);
+            const B_sh = Math.pow(playerBrating, (alpha + TB) / 2);
+
+            // Predicted score
+            const A_pred = 1 / (1 + Math.exp((playerBrating - playerArating) / C));
+            const B_pred = 1 / (1 + Math.exp((playerArating - playerBrating) / C));
+
+            // New ratings
+            const newArating = playerArating + Math.pow(A_sh, playerAdeviation) * (score - A_pred) + Math.pow(A_sh, playerAdeviation) * playerAvolatility;
+            const newBrating = playerBrating + Math.pow(B_sh, playerBdeviation) * ((1 - score) - B_pred) + Math.pow(B_sh, playerBdeviation) * playerBvolatility;
+
+            // New deviations
+            const newAdeviation = Math.pow(playerAdeviation * TA, 1 - Math.abs(playerAvolatility));
+            const newBdeviation = Math.pow(playerBdeviation * TB, 1 - Math.abs(playerBvolatility));
+
+            // Update the text content of the result elements
+            newratingAParagraph.textContent = `New Rating for Player A: ${newArating.toFixed(15)}`;
+            newdeviationAParagraph.textContent = `New Deviation for Player A: ${newAdeviation.toFixed(15)}`;
+            newratingBParagraph.textContent = `New Rating for Player B: ${newBrating.toFixed(15)}`;
+            newdeviationBParagraph.textContent = `New Deviation for Player B: ${newBdeviation.toFixed(15)}`;
+        }
+
+        // Add event listeners to trigger the calculation when inputs change
+        ratingvariationInput.addEventListener("change", calculateRating);
+        alphaInput.addEventListener("change", calculateRating);
+        scoreSelect.addEventListener("change", calculateRating);
+        ratingAInput.addEventListener("input", calculateRating);
+        deviationAInput.addEventListener("input", calculateRating);
+        volatilityAInput.addEventListener("input", calculateRating);
+        ratingBInput.addEventListener("input", calculateRating);
+        deviationBInput.addEventListener("input", calculateRating);
+        volatilityBInput.addEventListener("input", calculateRating);
+        
+        // Initial calculation on page load
+        calculateRating();
+    </script>
+</body>
+</html>
